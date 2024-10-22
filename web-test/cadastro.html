@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Produto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Cadastro de Produto</h2>
+        <form id="productForm">
+            <div class="form-group">
+                <label for="productName">Nome do Produto</label>
+                <input type="text" class="form-control" id="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="productPrice">Preço</label>
+                <input type="number" class="form-control" id="productPrice" required>
+            </div>
+            <div class="form-group">
+                <label for="productQuantity">Quantidade</label>
+                <input type="number" class="form-control" id="productQuantity" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Cadastrar Produto</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('productForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('productName').value;
+            const price = document.getElementById('productPrice').value;
+            const quantity = document.getElementById('productQuantity').value;
+
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+            products.push({ name, price, quantity });
+            localStorage.setItem('products', JSON.stringify(products));
+
+            alert('Produto cadastrado com sucesso!');
+            window.location.href = 'listar-produtos.html';  // redirecionar para a listagem de produtos
+        });
+    </script>
+</body>
+</html>
